@@ -1,3 +1,8 @@
+## 1.3.0
+- Updated `README.md` file and added purpose of the package.
+- Added video tutorial link in `README.md` file.
+- Added Social Media links in `README.md` file & Maintainer's details.
+
 ## 1.2.0
 
 - Updated `pubspec.yaml` file to support latest linting rules & added `topics`.

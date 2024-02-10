@@ -11,13 +11,30 @@
 
 A Flutter package to provide Adaptive Screen Utils for creating responsive UI for different screen sizes. Make your UI look great on any device.
 
+<p align="center">
+  <a href="https://www.youtube.com/watch?feature=player_embedded&v=KYb8aqa6XEY" target="_blank">
+    <img src="https://img.youtube.com/vi/KYb8aqa6XEY/0.jpg" alt="Youtube Video" width="480" height="360" />
+  </a>
+</p>
+
+This package is created for educational purposes in Flutter Jaipur Meetup: [ Make your own package publish on pub.dev](https://www.meetup.com/flutterjaipur/events/299009464/).
+
+You can use it in production as well. It is a simple package that provides a few methods to check the screen size and create a responsive UI.
+
+### Flutter Jaipur Social Handles
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Flutter%20Jaipur-blue.svg?logo=linkedin)](https://www.linkedin.com/company/flutter-jaipur)
+[![Twitter](https://img.shields.io/badge/Twitter-Flutter%20Jaipur-blue.svg?logo=twitter)](https://twitter.com/Flutter_Jaipur)
+[![Meetup](https://img.shields.io/badge/Meetup-Flutter%20Jaipur-blue.svg?logo=meetup)](https://www.meetup.com/meetup-group-flutterjaipur/)
+[![YouTube](https://img.shields.io/badge/YouTube-Flutter%20Jaipur-blue.svg?logo=youtube)](https://www.youtube.com/@FlutterJaipur)
+
 ## Usage
 
 To use this package, add `adaptive_screen_utils` as a [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/).
 
 ```yaml
 dependencies:
-  adaptive_screen_utils: ^1.2.0
+  adaptive_screen_utils: ^1.3.0
 ```
 
 ## Example
@@ -87,6 +104,8 @@ Star ⭐ the repo if you find it useful 🤩🤩. we are open to `enhancements`,
 MIT License
 ```
 
-## Maintainers
+## Maintainers & Collaborators
 
 ### [Ravi Kovind](https://ravikovind.github.io/)
+
+### [Flutter Jaipur](https://www.meetup.com/meetup-group-flutterjaipur/)
