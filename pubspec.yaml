@@ -1,7 +1,8 @@
 name: adaptive_screen_utils
 description: "Flutter Package for creating adaptive UIs for different screen sizes."
-version: 1.0.0
-homepage: https://github.com/ravikovind/adaptive_screen_utils.git
+version: 1.1.0
+homepage: https://ravikovind.github.io/
+repository: https://github.com/ravikovind/adaptive_screen_utils
 issue_tracker: https://github.com/ravikovind/adaptive_screen_utils/issues
 
 environment:
@@ -15,6 +16,13 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.0
 
 flutter:
+
+tags:
+  - ui
+  - adaptive
+  - responsive
+  - screen
+  - adaptive_screen_utils
