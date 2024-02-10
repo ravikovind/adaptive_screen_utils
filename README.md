@@ -16,7 +16,7 @@ To use this package, add `adaptive_screen_utils` as a [dependency in your pubspe
 
 ```yaml
 dependencies:
-  adaptive_screen_utils: ^0.0.1
+  adaptive_screen_utils: ^1.0.0
 ```
 
 ## Example

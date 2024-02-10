@@ -1,6 +1,6 @@
 name: adaptive_screen_utils
 description: "Flutter Package for creating adaptive UIs for different screen sizes."
-version: 0.0.1
+version: 1.0.0
 homepage: https://github.com/ravikovind/adaptive_screen_utils.git
 issue_tracker: https://github.com/ravikovind/adaptive_screen_utils/issues
 
