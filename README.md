@@ -8,18 +8,20 @@
 ![GitHub forks](https://img.shields.io/github/forks/ravikovind/adaptive_screen_utils)
 ![GitHub issues](https://img.shields.io/github/issues/ravikovind/adaptive_screen_utils)
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/ravikovind/adaptive_screen_utils)
+![GitHub contributors](https://img.shields.io/github/contributors/ravikovind/adaptive_screen_utils)
+![GitHub last commit](https://img.shields.io/github/last-commit/ravikovind/adaptive_screen_utils)
 
-A Flutter package to provide Adaptive Screen Utils for creating responsive UI for different screen sizes. Make your UI look great on any device.
+A Flutter package to provide Adaptive Screen Utils for creating responsive UI for different screen sizes. Make your UI look great on any device. Easy to manage different screen sizes.
 
 <p align="center">
   <a href="https://www.youtube.com/watch?feature=player_embedded&v=KYb8aqa6XEY" target="_blank">
-    <img src="https://img.youtube.com/vi/KYb8aqa6XEY/0.jpg" alt="Youtube Video" width="480" height="360" />
+    <img src="https://img.youtube.com/vi/KYb8aqa6XEY/0.jpg" alt="Youtube Video" width="480" height="320" />
   </a>
 </p>
 
 This package is created for educational purposes in Flutter Jaipur Meetup: [ Make your own package publish on pub.dev](https://www.meetup.com/flutterjaipur/events/299009464/).
 
-You can use it in production as well. It is a simple package that provides a few methods to check the screen size and create a responsive UI.
+You can use it in production as well. It is a simple package that provides a few methods to check the screen size and create a responsive UI based on the screen width, height, and orientation.
 
 ### Flutter Jaipur Social Handles
 
@@ -34,7 +36,7 @@ To use this package, add `adaptive_screen_utils` as a [dependency in your pubspe
 
 ```yaml
 dependencies:
-  adaptive_screen_utils: ^1.3.0
+  adaptive_screen_utils: ^2.1.0
 ```
 
 ## Example
@@ -87,11 +89,20 @@ class MyWidget extends StatelessWidget {
 
 ## Methods
 
-| Method     | Description                                              |
-| ---------- | -------------------------------------------------------- |
-| `compact`  | Returns `true` if the screen width is less than 600.0    |
-| `medium`   | Returns `true` if the screen width is less than 840.0    |
-| `expanded` | Returns `true` if the screen width is greater than 840.0 |
+| Method     | Orientation | Height | Width | DeviceType | Result |
+| ---------- | ----------- | ------ | ----- | ---------- | ------ |
+| `compact`  | Portrait    | 480.0  | 600.0 | Mobile     | `true` |
+| `compact`  | Landscape   | 600.0  | 480.0 | Mobile     | `true` |
+| `medium`   | Portrait    | 900.0  | 840.0 | Tablet     | `true` |
+| `medium`   | Landscape   | 840.0  | 900.0 | Tablet     | `true` |
+| `expanded` | Portrait    | 960.0  | 840.0 | Desktop    | `true` |
+| `expanded` | Landscape   | 840.0  | 960.0 | Desktop    | `true` |
+| `screenType` | ----------- | ------ | ----- | ---------- | `DeviceType` |
+
+## Disclaimer
+The current approach to determining device types (compact, medium, and expanded) based on width, height, and orientation is a simple approach. It may not be accurate for all devices.
+
+[https://developer.android.com/develop/ui/views/layout/window-size-classes](https://developer.android.com/develop/ui/views/layout/window-size-classes) is a good reference for understanding the concept of screen size classes. this package is inspired by the above link.
 
 ## Issues & Feedback
 

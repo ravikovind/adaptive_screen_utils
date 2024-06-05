@@ -1,20 +1,21 @@
 import 'package:flutter/widgets.dart';
 
-/// DeviceType is an enum to represent the type of device based on the smallest width of the device.
+/// DeviceType is an enum to represent the type of device based on the with, height and orientation of the device.
 ///
-/// [compact] is for small devices like mobile phones
-/// 99.96% of phones in portrait mode have a width of 600 or less
+/// [compact] is for small devices like mobile phones.
+/// 99.96% of phones in portrait mode have a width of 600 or less.
+/// 99.78% of phones in landscape mode have a height of 480 or less.
 ///
-/// [medium] is for medium devices like tablets
-/// 93.73% of tablets in portrait,
-/// most large unfolded inner displays in portrait
+/// [medium] is for medium devices like tablets.
+/// 93.73% of tablets in portrait, most large unfolded inner displays in portrait have a width of 840 or less and greater than equal to 600.
+/// 96.56% of tablets in landscape have a height of 900 or less and greater than equal to 480.
 ///
-/// [expanded] is for large devices like desktops
-/// 97.22% of tablets in landscape,
-/// most large unfolded inner displays in landscape
+/// [expanded] is for large devices like desktops.
+/// 94.25% of tablets in portrait have a height of 960 or more.
+/// 97.22% of tablets in landscape, most large unfolded inner displays in landscape have a width of 840 or more.
 ///
-/// [https://developer.android.com/guide/topics/large-screens/support-different-screen-sizes](https://developer.android.com/guide/topics/large-screens/support-different-screen-sizes)
-///
+/// [https://developer.android.com/develop/ui/views/layout/window-size-classes](https://developer.android.com/develop/ui/views/layout/window-size-classes)
+
 enum DeviceType {
   /// compact is for small devices like mobile phones
   compact,
@@ -26,60 +27,93 @@ enum DeviceType {
   expanded
 }
 
-/// [_screenType] based on the smallest width of the device
-///  shortest width is helpful to determine device type regardless of orientation.
+/// [_screenType] based on the width, height and orientation of the device. this responsible for determining the type of device.
 ///
-/// if the smallest width is less than 600, it's a compact device (mobile phone)
+/// returns [DeviceType] based on the width, height and orientation of the device.
 ///
-/// if the smallest width is less than 840, it's a medium device (tablet)
+/// [context] is the BuildContext of the widget.
 ///
-/// if the smallest width is greater than 840, it's an expanded device (desktop)
+/// [compact] is for small devices like mobile phones.
+/// 99.96% of phones in portrait mode have a width of 600 or less.
+/// 99.78% of phones in landscape mode have a height of 480 or less.
 ///
-/// [https://developer.android.com/guide/topics/large-screens/support-different-screen-sizes](https://developer.android.com/guide/topics/large-screens/support-different-screen-sizes)
+/// [medium] is for medium devices like tablets.
+/// 93.73% of tablets in portrait, most large unfolded inner displays in portrait have a width of 840 or less and greater than equal to 600.
+/// 96.56% of tablets in landscape have a height of 900 or less and greater than equal to 480.
+///
+/// [expanded] is for large devices like desktops.
+/// 94.25% of tablets in portrait have a height of 900 or more.
+/// 97.22% of tablets in landscape, most large unfolded inner displays in landscape have a width of 840 or more.
+
 DeviceType _screenType(BuildContext context) {
-  final smallestWidth = MediaQuery.of(context).size.shortestSide;
-  if (smallestWidth < 600) {
-    return DeviceType.compact;
-  } else if (smallestWidth < 840) {
-    return DeviceType.medium;
+  final orientation = MediaQuery.of(context).orientation;
+  final height = MediaQuery.of(context).size.height;
+  final width = MediaQuery.of(context).size.width;
+  switch (orientation) {
+    case Orientation.portrait:
+      if (width <= 600) {
+        return DeviceType.compact;
+      } else if (width <= 840) {
+        return DeviceType.medium;
+      } else {
+        return DeviceType.expanded;
+      }
+    case Orientation.landscape:
+      if (height <= 480) {
+        return DeviceType.compact;
+      } else if (height <= 900) {
+        return DeviceType.medium;
+      } else {
+        return DeviceType.expanded;
+      }
   }
-  return DeviceType.expanded;
 }
 
-/// compact is a helper function to check if the device is compact (mobile phone)
+@visibleForTesting
+
+/// [screenType] is a helper function to check,
+/// if the device is compact (mobile phone), medium (tablet) or expanded (desktop)
+/// based on the width, height and orientation of the device.
+DeviceType screenType(BuildContext context) => _screenType(context);
+
+/// compact is a helper function to check,
+/// if the device is compact (mobile phone)
+///
+/// 99.96% of phones in portrait mode have a width of 600 or less.
+/// 99.78% of phones in landscape mode have a height of 480 or less.
 ///
 /// ```dart
 /// if (compact(context)) {
-///  return MobileLayout();
+///  return MobilePhoneWidget();
 /// }
-/// return OtherLayout();
 /// ```
-///
-/// [https://developer.android.com/guide/topics/large-screens/support-different-screen-sizes](https://developer.android.com/guide/topics/large-screens/support-different-screen-sizes)
 bool compact(BuildContext context) =>
     _screenType(context) == DeviceType.compact;
 
-/// medium is a helper function to check if the device is medium (tablet)
+/// medium is a helper function to check,
+/// if the device is medium (tablet)
+///
+/// 93.73% of tablets in portrait, most large unfolded inner displays in portrait have a width of 840 or less and greater than equal to 600.
+/// 96.56% of tablets in landscape have a height of 900 or less and greater than equal to 480.
 ///
 /// ```dart
 /// if (medium(context)) {
-/// return TabletLayout();
+/// return TabletWidget();
 /// }
-/// return OtherLayout();
 /// ```
-///
-/// [https://developer.android.com/guide/topics/large-screens/support-different-screen-sizes](https://developer.android.com/guide/topics/large-screens/support-different-screen-sizes)
 bool medium(BuildContext context) => _screenType(context) == DeviceType.medium;
 
-/// expanded is a helper function to check if the device is expanded (desktop)
+/// expanded is a helper function to check,
+/// if the device is expanded (desktop)
+///
+/// 94.25% of tablets in portrait have a height of 960 or more.
+/// 97.22% of tablets in landscape, most large unfolded inner displays in landscape have a width of 840 or more.
 ///
 /// ```dart
 /// if (expanded(context)) {
-/// return DesktopLayout();
+/// return DesktopWidget();
 /// }
-/// return OtherLayout();
 /// ```
-///
-/// [https://developer.android.com/guide/topics/large-screens/support-different-screen-sizes](https://developer.android.com/guide/topics/large-screens/support-different-screen-sizes)
+
 bool expanded(BuildContext context) =>
     _screenType(context) == DeviceType.expanded;

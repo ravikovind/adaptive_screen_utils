@@ -1,4 +1,16 @@
+## 2.1.0
+- Updated `README.md` file with the latest changes.
+- Tested on different device sizes. using chrome dev tools.
+
+## 2.0.0
+
+- Updated core logic of the package.
+- Based on height, width, and orientation, the package will return the `DeviceType`.
+- Added `screenType` function to get the `DeviceType`.
+- Updated `README.md` file with the latest changes.
+
 ## 1.3.0
+
 - Updated `README.md` file and added purpose of the package.
 - Added video tutorial link in `README.md` file.
 - Added Social Media links in `README.md` file & Maintainer's details.

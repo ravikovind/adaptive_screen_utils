@@ -1,24 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:adaptive_screen_utils/adaptive_screen_utils.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Adaptive Screen Utils Example',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Flutter Adaptive Screen Utils Example'),
-    );
-  }
+  Widget build(BuildContext context) => MaterialApp(
+        title: 'Adaptive Screen Utils',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
+        ),
+        darkTheme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.redAccent),
+        ),
+        home: const MyHomePage(title: 'Adaptive Screen Utils'),
+      );
 }
 
 class MyHomePage extends StatefulWidget {
@@ -50,15 +47,19 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         children: [
           ...List.generate(
-            100,
+            2 * 4 * 6,
             (index) => Container(
               color: index.isEven
-                  ? Theme.of(context).colorScheme.primary
-                  : Theme.of(context).colorScheme.secondary,
+                  ? Theme.of(context).colorScheme.onPrimaryContainer
+                  : Theme.of(context).colorScheme.onSecondaryContainer,
               child: Center(
                 child: Text(
-                  'Item $index',
-                  style: Theme.of(context).textTheme.titleLarge,
+                  'Item ${index + 1}',
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        color: index.isEven
+                            ? Theme.of(context).colorScheme.onPrimary
+                            : Theme.of(context).colorScheme.onSecondary,
+                      ),
                 ),
               ),
             ),
