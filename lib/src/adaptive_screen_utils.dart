@@ -2,6 +2,9 @@ import 'package:flutter/widgets.dart';
 
 /// DeviceType is an enum to represent the type of device based on the with, height and orientation of the device.
 ///
+/// [wearable] is for wearable devices like watches.
+/// 99.99% of watches have a width of 450 or less. Most watches have a height of 450 or less. in portrait/landscape mode.
+///
 /// [compact] is for small devices like mobile phones.
 /// 99.96% of phones in portrait mode have a width of 600 or less.
 /// 99.78% of phones in landscape mode have a height of 480 or less.
@@ -14,9 +17,14 @@ import 'package:flutter/widgets.dart';
 /// 94.25% of tablets in portrait have a height of 960 or more.
 /// 97.22% of tablets in landscape, most large unfolded inner displays in landscape have a width of 840 or more.
 ///
+/// `Reference`
 /// [https://developer.android.com/develop/ui/views/layout/window-size-classes](https://developer.android.com/develop/ui/views/layout/window-size-classes)
+///
 
 enum DeviceType {
+  /// wearable is for wearable devices like watches
+  wearable,
+
   /// compact is for small devices like mobile phones
   compact,
 
@@ -27,54 +35,23 @@ enum DeviceType {
   expanded
 }
 
-/// [_screenType] based on the width, height and orientation of the device. this responsible for determining the type of device.
-///
-/// returns [DeviceType] based on the width, height and orientation of the device.
-///
-/// [context] is the BuildContext of the widget.
-///
-/// [compact] is for small devices like mobile phones.
-/// 99.96% of phones in portrait mode have a width of 600 or less.
-/// 99.78% of phones in landscape mode have a height of 480 or less.
-///
-/// [medium] is for medium devices like tablets.
-/// 93.73% of tablets in portrait, most large unfolded inner displays in portrait have a width of 840 or less and greater than equal to 600.
-/// 96.56% of tablets in landscape have a height of 900 or less and greater than equal to 480.
-///
-/// [expanded] is for large devices like desktops.
-/// 94.25% of tablets in portrait have a height of 900 or more.
-/// 97.22% of tablets in landscape, most large unfolded inner displays in landscape have a width of 840 or more.
+/// wearable is a helper function to check,
+/// if the device is wearable (watch)
+/// 99.99% of watches have a width of 450 or less. Most watches have a height of 450 or less. in portrait/landscape mode.
+/// ```dart
+/// if (wearable(context)) {
+/// return WatchWidget();
+/// }
+/// ```
 
-DeviceType _screenType(BuildContext context) {
-  final orientation = MediaQuery.of(context).orientation;
+bool wearable(BuildContext context) {
   final height = MediaQuery.of(context).size.height;
   final width = MediaQuery.of(context).size.width;
-  switch (orientation) {
-    case Orientation.portrait:
-      if (width <= 600) {
-        return DeviceType.compact;
-      } else if (width <= 840) {
-        return DeviceType.medium;
-      } else {
-        return DeviceType.expanded;
-      }
-    case Orientation.landscape:
-      if (height <= 480) {
-        return DeviceType.compact;
-      } else if (height <= 900) {
-        return DeviceType.medium;
-      } else {
-        return DeviceType.expanded;
-      }
+  if (width <= 450 || height <= 450) {
+    return true;
   }
+  return false;
 }
-
-@visibleForTesting
-
-/// [screenType] is a helper function to check,
-/// if the device is compact (mobile phone), medium (tablet) or expanded (desktop)
-/// based on the width, height and orientation of the device.
-DeviceType screenType(BuildContext context) => _screenType(context);
 
 /// compact is a helper function to check,
 /// if the device is compact (mobile phone)
@@ -87,8 +64,24 @@ DeviceType screenType(BuildContext context) => _screenType(context);
 ///  return MobilePhoneWidget();
 /// }
 /// ```
-bool compact(BuildContext context) =>
-    _screenType(context) == DeviceType.compact;
+bool compact(BuildContext context) {
+  final height = MediaQuery.of(context).size.height;
+  final width = MediaQuery.of(context).size.width;
+  final orientation = MediaQuery.of(context).orientation;
+  switch (orientation) {
+    case Orientation.portrait:
+      if (width <= 600) {
+        return true;
+      }
+      break;
+    case Orientation.landscape:
+      if (height <= 480) {
+        return true;
+      }
+      break;
+  }
+  return false;
+}
 
 /// medium is a helper function to check,
 /// if the device is medium (tablet)
@@ -101,7 +94,24 @@ bool compact(BuildContext context) =>
 /// return TabletWidget();
 /// }
 /// ```
-bool medium(BuildContext context) => _screenType(context) == DeviceType.medium;
+bool medium(BuildContext context) {
+  final height = MediaQuery.of(context).size.height;
+  final width = MediaQuery.of(context).size.width;
+  final orientation = MediaQuery.of(context).orientation;
+  switch (orientation) {
+    case Orientation.portrait:
+      if (width >= 600 && width <= 840) {
+        return true;
+      }
+      break;
+    case Orientation.landscape:
+      if (height >= 480 && height <= 900) {
+        return true;
+      }
+      break;
+  }
+  return false;
+}
 
 /// expanded is a helper function to check,
 /// if the device is expanded (desktop)
@@ -115,5 +125,95 @@ bool medium(BuildContext context) => _screenType(context) == DeviceType.medium;
 /// }
 /// ```
 
-bool expanded(BuildContext context) =>
-    _screenType(context) == DeviceType.expanded;
+bool expanded(BuildContext context) {
+  final height = MediaQuery.of(context).size.height;
+  final width = MediaQuery.of(context).size.width;
+  final orientation = MediaQuery.of(context).orientation;
+  switch (orientation) {
+    case Orientation.portrait:
+      if (height >= 960) {
+        return true;
+      }
+      break;
+    case Orientation.landscape:
+      if (width >= 840) {
+        return true;
+      }
+      break;
+  }
+  return false;
+}
+
+/// extension on BuildContext for accessing deviceTypes directly from the context
+
+extension OfBuildContext on BuildContext {
+  /// [wearable] is for wearable devices like watches.
+  bool get wearable {
+    final height = MediaQuery.of(this).size.height;
+    final width = MediaQuery.of(this).size.width;
+    if (width <= 450 || height <= 450) {
+      return true;
+    }
+    return false;
+  }
+
+  /// [compact] is for small devices like mobile phones.
+  bool get compact {
+    final height = MediaQuery.of(this).size.height;
+    final width = MediaQuery.of(this).size.width;
+    final orientation = MediaQuery.of(this).orientation;
+    switch (orientation) {
+      case Orientation.portrait:
+        if (width <= 600) {
+          return true;
+        }
+        break;
+      case Orientation.landscape:
+        if (height <= 480) {
+          return true;
+        }
+        break;
+    }
+    return false;
+  }
+
+  /// [medium] is for medium devices like tablets.
+  bool get medium {
+    final height = MediaQuery.of(this).size.height;
+    final width = MediaQuery.of(this).size.width;
+    final orientation = MediaQuery.of(this).orientation;
+    switch (orientation) {
+      case Orientation.portrait:
+        if (width >= 600 && width <= 840) {
+          return true;
+        }
+        break;
+      case Orientation.landscape:
+        if (height >= 480 && height <= 900) {
+          return true;
+        }
+        break;
+    }
+    return false;
+  }
+
+  /// [expanded] is for large devices like desktops.
+  bool get expanded {
+    final height = MediaQuery.of(this).size.height;
+    final width = MediaQuery.of(this).size.width;
+    final orientation = MediaQuery.of(this).orientation;
+    switch (orientation) {
+      case Orientation.portrait:
+        if (height >= 960) {
+          return true;
+        }
+        break;
+      case Orientation.landscape:
+        if (width >= 840) {
+          return true;
+        }
+        break;
+    }
+    return false;
+  }
+}

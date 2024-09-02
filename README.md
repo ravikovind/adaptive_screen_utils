@@ -36,7 +36,7 @@ To use this package, add `adaptive_screen_utils` as a [dependency in your pubspe
 
 ```yaml
 dependencies:
-  adaptive_screen_utils: ^2.1.0
+  adaptive_screen_utils: ^2.2.0
 ```
 
 ## Example
@@ -89,20 +89,23 @@ class MyWidget extends StatelessWidget {
 
 ## Methods
 
-| Method     | Orientation | Height | Width | DeviceType | Result |
-| ---------- | ----------- | ------ | ----- | ---------- | ------ |
-| `compact`  | Portrait    | 480.0  | 600.0 | Mobile     | `true` |
-| `compact`  | Landscape   | 600.0  | 480.0 | Mobile     | `true` |
-| `medium`   | Portrait    | 900.0  | 840.0 | Tablet     | `true` |
-| `medium`   | Landscape   | 840.0  | 900.0 | Tablet     | `true` |
-| `expanded` | Portrait    | 960.0  | 840.0 | Desktop    | `true` |
-| `expanded` | Landscape   | 840.0  | 960.0 | Desktop    | `true` |
-| `screenType` | ----------- | ------ | ----- | ---------- | `DeviceType` |
+| Method     | Orientation | Height | Width | DeviceType | Result       |
+| ---------- | ----------- | ------ | ----- | ---------- | ------------ |
+| `wearable` | Portrait    | 450.0  | 450.0 | Watch      | `true`       |
+| `wearable` | Landscape   | 450.0  | 450.0 | Watch      | `true`       |
+| `compact`  | Portrait    | 480.0  | 600.0 | Mobile     | `true`       |
+| `compact`  | Landscape   | 600.0  | 480.0 | Mobile     | `true`       |
+| `medium`   | Portrait    | 900.0  | 840.0 | Tablet     | `true`       |
+| `medium`   | Landscape   | 840.0  | 900.0 | Tablet     | `true`       |
+| `expanded` | Portrait    | 960.0  | 840.0 | Desktop    | `true`       |
+| `expanded` | Landscape   | 840.0  | 960.0 | Desktop    | `true`       |
+| `Type`     | ----------- | ------ | ----- | ---------- | `DeviceType` |
 
 ## Disclaimer
-The current approach to determining device types (compact, medium, and expanded) based on width, height, and orientation is a simple approach. It may not be accurate for all devices.
 
-[https://developer.android.com/develop/ui/views/layout/window-size-classes](https://developer.android.com/develop/ui/views/layout/window-size-classes) is a good reference for understanding the concept of screen size classes. this package is inspired by the above link.
+The current approach to determining device types (wearable, compact, medium, and expanded) based on width, height, and orientation is a simple approach. It may not be accurate for all devices.
+
+[https://developer.android.com/develop/ui/views/layout/window-size-classes](https://developer.android.com/develop/ui/views/layout/window-size-classes) is a good reference for understanding the concept of screen size classes. this package is inspired by the above link & check wearables, compact, medium, and expanded based on width, height, and orientation.
 
 ## Issues & Feedback
 

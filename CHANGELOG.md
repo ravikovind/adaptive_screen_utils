@@ -1,4 +1,12 @@
+# 2.2.0
+
+- Added in `wearable` device type in `DeviceType` enum.
+- Added extension method for all `DeviceType` enum values.
+- Updated `README.md` file with the latest changes.
+- updated logics for identifying the device type.
+
 ## 2.1.0
+
 - Updated `README.md` file with the latest changes.
 - Tested on different device sizes. using chrome dev tools.
 
