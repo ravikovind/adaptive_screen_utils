@@ -1,26 +1,21 @@
 import 'package:flutter/widgets.dart';
 
-/// DeviceType is an enum to represent the type of device based on the with, height and orientation of the device.
+/// DeviceType is an enum to represent the type of device based on width, height, and orientation of the device.
 ///
 /// [wearable] is for wearable devices like watches.
-/// 99.99% of watches have a width of 450 or less. Most watches have a height of 450 or less. in portrait/landscape mode.
+/// 99.99% of watches have a width of 300 or less. Most watches have a height of 300 or less in portrait/landscape mode.
 ///
 /// [compact] is for small devices like mobile phones.
-/// 99.96% of phones in portrait mode have a width of 600 or less.
-/// 99.78% of phones in landscape mode have a height of 480 or less.
+/// 99.96% of phones in portrait mode have a width of 480 or less.
+/// 99.78% of phones in landscape mode have a height of 320 or less.
 ///
 /// [medium] is for medium devices like tablets.
-/// 93.73% of tablets in portrait, most large unfolded inner displays in portrait have a width of 840 or less and greater than equal to 600.
-/// 96.56% of tablets in landscape have a height of 900 or less and greater than equal to 480.
+/// 93.73% of tablets in portrait, most large unfolded inner displays in portrait, have a width of 481 or more and less than or equal to 720.
+/// 96.56% of tablets in landscape have a height of 321 or more and less than or equal to 600.
 ///
 /// [expanded] is for large devices like desktops.
 /// 94.25% of tablets in portrait have a height of 960 or more.
-/// 97.22% of tablets in landscape, most large unfolded inner displays in landscape have a width of 840 or more.
-///
-/// `Reference`
-/// [https://developer.android.com/develop/ui/views/layout/window-size-classes](https://developer.android.com/develop/ui/views/layout/window-size-classes)
-///
-
+/// 97.22% of tablets in landscape, most large unfolded inner displays in landscape, have a width of 840 or more.
 enum DeviceType {
   /// wearable is for wearable devices like watches
   wearable,
@@ -37,7 +32,7 @@ enum DeviceType {
 
 /// wearable is a helper function to check,
 /// if the device is wearable (watch)
-/// 99.99% of watches have a width of 450 or less. Most watches have a height of 450 or less. in portrait/landscape mode.
+/// 99.99% of watches have a width of 300 or less. Most watches have a height of 300 or less. in portrait/landscape mode.
 /// ```dart
 /// if (wearable(context)) {
 /// return WatchWidget();
@@ -47,7 +42,7 @@ enum DeviceType {
 bool wearable(BuildContext context) {
   final height = MediaQuery.of(context).size.height;
   final width = MediaQuery.of(context).size.width;
-  if (width <= 450 || height <= 450) {
+  if (width <= 300 || height <= 300) {
     return true;
   }
   return false;
@@ -70,12 +65,12 @@ bool compact(BuildContext context) {
   final orientation = MediaQuery.of(context).orientation;
   switch (orientation) {
     case Orientation.portrait:
-      if (width <= 600) {
+      if (width <= 480) {
         return true;
       }
       break;
     case Orientation.landscape:
-      if (height <= 480) {
+      if (height <= 320) {
         return true;
       }
       break;
@@ -151,7 +146,7 @@ extension OfBuildContext on BuildContext {
   bool get wearable {
     final height = MediaQuery.of(this).size.height;
     final width = MediaQuery.of(this).size.width;
-    if (width <= 450 || height <= 450) {
+    if (width <= 300 || height <= 300) {
       return true;
     }
     return false;

@@ -1,4 +1,7 @@
-# 2.2.0
+## 2.3.0
+- Updated break points for `DeviceType` enum values.
+
+## 2.2.0
 
 - Added in `wearable` device type in `DeviceType` enum.
 - Added extension method for all `DeviceType` enum values.
