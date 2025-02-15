@@ -1,3 +1,9 @@
+## 2.4.0
+- Updated `README.md` file with the latest changes.
+- Added `DeviceType` enum values for `large` and `extraLarge` devices.
+- Added extension method for all `DeviceType` enum values.
+- Updated logics for identifying the device type.
+
 ## 2.3.0
 - Updated break points for `DeviceType` enum values.
 
